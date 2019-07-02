@@ -73,6 +73,7 @@ src_configure() {
 		--disable-libx265-static \
 		--disable-libvpx \
 		--disable-libvpx-static \
+		--disable-nvenc \
 		$(use_enable capmt) \
 		$(use_enable constcw) \
 		$(use_enable cwc) \
