@@ -8,6 +8,7 @@ inherit linux-info systemd toolchain-funcs user
 DESCRIPTION="Tvheadend is a TV streaming server and digital video recorder"
 HOMEPAGE="https://tvheadend.org/"
 SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URL+="http://ffmpeg.org/releases/ffmpeg-3.4.5.tar.bz2 -> ffmpeg-3.4.5.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -90,7 +91,7 @@ src_configure() {
 }
 
 src_compile() {
-	emake CC="$(tc-getCC)"
+	emake CC="$(tc-getCC)" TVHEADEND_FILE_CACHE="${DISTDIR}"
 }
 
 src_install() {
