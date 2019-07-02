@@ -71,6 +71,8 @@ src_configure() {
 		--nowerror \
 		--disable-libx265 \
 		--disable-libx265-static \
+		--disable-libvpx \
+		--disable-libvpx-static \
 		$(use_enable capmt) \
 		$(use_enable constcw) \
 		$(use_enable cwc) \
