@@ -1,28 +1,32 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit linux-info systemd toolchain-funcs user
 
 DESCRIPTION="Tvheadend is a TV streaming server and digital video recorder"
 HOMEPAGE="https://tvheadend.org/"
 SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-SRC_URL+="http://ffmpeg.org/releases/ffmpeg-3.4.5.tar.bz2 -> ffmpeg-3.4.5.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 
-IUSE="+capmt +constcw +cwc dbus debug dvbcsa dvben50221 +dvb hdhomerun +imagecache +inotify iptv libressl satip systemd +timeshift uriparser xmltv zeroconf zlib"
+IUSE="+capmt +constcw +cwc dbus debug dvbcsa dvben50221 +dvb +ffmpeg hdhomerun +imagecache +inotify iptv libressl satip systemd +timeshift uriparser xmltv zeroconf zlib"
+
+BDEPEND="
+	sys-devel/gettext
+	virtual/pkgconfig"
 
 RDEPEND="
 	virtual/libiconv
 	dbus? ( sys-apps/dbus )
 	dvbcsa? ( media-libs/libdvbcsa )
 	dvben50221? ( media-tv/linuxtv-dvb-apps )
+	ffmpeg? ( media-video/ffmpeg:0= )
 	hdhomerun? ( media-libs/libhdhomerun )
-	!libressl? ( dev-libs/openssl:= )
+	!libressl? ( dev-libs/openssl:0= )
 	libressl? ( dev-libs/libressl:= )
 	uriparser? ( dev-libs/uriparser )
 	zeroconf? ( net-dns/avahi )
@@ -30,8 +34,6 @@ RDEPEND="
 
 DEPEND="
 	${RDEPEND}
-	sys-devel/gettext
-	virtual/pkgconfig
 	dvb? ( virtual/linuxtv-dvb-headers )"
 
 RDEPEND+="
@@ -44,9 +46,9 @@ REQUIRED_USE="dvbcsa? ( || ( capmt constcw cwc dvben50221 ) )"
 # https://github.com/rpmfusion/tvheadend
 
 PATCHES=(
-	"${FILESDIR}/${PN}-4.0.9-use_system_queue.patch"
-	"${FILESDIR}/${PN}-4.2.1-hdhomerun.patch"
-	"${FILESDIR}/${PN}-4.2.2-dtv_scan_tables.patch"
+	"${FILESDIR}"/${PN}-4.0.9-use_system_queue.patch
+	"${FILESDIR}"/${PN}-4.2.1-hdhomerun.patch
+	"${FILESDIR}"/${PN}-4.2.2-dtv_scan_tables.patch
 )
 
 DOCS=( README.md )
@@ -65,9 +67,8 @@ src_configure() {
 		--disable-bundle \
 		--disable-ccache \
 		--disable-dvbscan \
-		--enable-ffmpeg_static \
+		--disable-ffmpeg_static \
 		--disable-hdhomerun_static \
-		--disable-bintray_cache \
 		--nowerror \
 		$(use_enable capmt) \
 		$(use_enable constcw) \
@@ -77,6 +78,7 @@ src_configure() {
 		$(use_enable dvb linuxdvb) \
 		$(use_enable dvbcsa) \
 		$(use_enable dvben50221) \
+		$(use_enable ffmpeg libav) \
 		$(use_enable hdhomerun hdhomerun_client) \
 		$(use_enable imagecache) \
 		$(use_enable inotify) \
@@ -91,7 +93,7 @@ src_configure() {
 }
 
 src_compile() {
-	emake CC="$(tc-getCC)" TVHEADEND_FILE_CACHE="${DISTDIR}"
+	emake CC="$(tc-getCC)"
 }
 
 src_install() {
