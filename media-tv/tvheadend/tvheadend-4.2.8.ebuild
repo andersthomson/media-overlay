@@ -13,7 +13,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 
-IUSE="+capmt +constcw +cwc dbus debug dvbcsa dvben50221 +dvb +ffmpeg hdhomerun +imagecache +inotify iptv libressl satip systemd +timeshift uriparser xmltv zeroconf zlib"
+IUSE="+capmt +constcw +cwc dbus debug dvbcsa dvben50221 +dvb hdhomerun +imagecache +inotify iptv libressl satip systemd +timeshift uriparser xmltv zeroconf zlib"
 
 BDEPEND="
 	sys-devel/gettext
@@ -24,7 +24,6 @@ RDEPEND="
 	dbus? ( sys-apps/dbus )
 	dvbcsa? ( media-libs/libdvbcsa )
 	dvben50221? ( media-tv/linuxtv-dvb-apps )
-	ffmpeg? ( media-video/ffmpeg:0= )
 	hdhomerun? ( media-libs/libhdhomerun )
 	!libressl? ( dev-libs/openssl:0= )
 	libressl? ( dev-libs/libressl:= )
@@ -67,7 +66,7 @@ src_configure() {
 		--disable-bundle \
 		--disable-ccache \
 		--disable-dvbscan \
-		--disable-ffmpeg_static \
+		--enable-ffmpeg_static \
 		--disable-hdhomerun_static \
 		--nowerror \
 		$(use_enable capmt) \
