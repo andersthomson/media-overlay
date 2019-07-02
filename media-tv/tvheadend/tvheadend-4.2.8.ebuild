@@ -64,7 +64,7 @@ src_configure() {
 		--disable-bundle \
 		--disable-ccache \
 		--disable-dvbscan \
-		--disable-ffmpeg_static \
+		--enable-ffmpeg_static \
 		--disable-hdhomerun_static \
 		--disable-bintray_cache \
 		--nowerror \
