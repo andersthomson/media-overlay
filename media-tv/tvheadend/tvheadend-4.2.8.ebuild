@@ -77,7 +77,6 @@ src_configure() {
 		$(use_enable dvb linuxdvb) \
 		$(use_enable dvbcsa) \
 		$(use_enable dvben50221) \
-		$(use_enable ffmpeg libav) \
 		$(use_enable hdhomerun hdhomerun_client) \
 		$(use_enable imagecache) \
 		$(use_enable inotify) \
