@@ -69,6 +69,8 @@ src_configure() {
 		--enable-ffmpeg_static \
 		--disable-hdhomerun_static \
 		--nowerror \
+		--disable-libx265 \
+		--disable-libx265-static \
 		$(use_enable capmt) \
 		$(use_enable constcw) \
 		$(use_enable cwc) \
