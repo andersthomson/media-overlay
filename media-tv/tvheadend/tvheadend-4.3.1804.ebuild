@@ -14,13 +14,12 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
 
-IUSE="+capmt +constcw +cwc dbus debug +ddci dvbcsa +dvb +ffmpeg hdhomerun +imagecache +inotify iptv libressl opus satip systemd +timeshift uriparser vpx x264 x265 xmltv zeroconf zlib"
+IUSE="+capmt +constcw +cwc dbus debug +ddci dvbcsa +dvb hdhomerun +imagecache +inotify iptv libressl opus satip systemd +timeshift uriparser vpx x264 x265 xmltv zeroconf zlib"
 
 RDEPEND="
 	virtual/libiconv
 	dbus? ( sys-apps/dbus )
 	dvbcsa? ( media-libs/libdvbcsa )
-	ffmpeg? ( media-video/ffmpeg:0/55.57.57[opus?,vpx?,x264?,x265?] )
 	hdhomerun? ( media-libs/libhdhomerun )
 	!libressl? ( dev-libs/openssl:= )
 	libressl? ( dev-libs/libressl:= )
@@ -35,13 +34,7 @@ DEPEND="
 	${RDEPEND}
 	sys-devel/gettext
 	virtual/pkgconfig
-	dvb? ( virtual/linuxtv-dvb-headers )
-	ffmpeg? (
-		opus? ( media-libs/opus )
-		vpx? ( media-libs/libvpx )
-		x264? ( media-libs/x264 )
-		x265? ( media-libs/x265 )
-	)"
+	"
 
 RDEPEND+="
 	dvb? ( media-tv/dtv-scan-tables )
@@ -84,7 +77,6 @@ src_configure() {
 		--disable-bundle \
 		--disable-ccache \
 		--disable-dvbscan \
-		--disable-ffmpeg_static \
 		--disable-hdhomerun_static \
 		--enable-libfdkaac \
 		--enable-libtheora \
@@ -98,7 +90,6 @@ src_configure() {
 		$(use_enable ddci) \
 		$(use_enable dvb linuxdvb) \
 		$(use_enable dvbcsa) \
-		$(use_enable ffmpeg libav) \
 		$(use_enable hdhomerun hdhomerun_client) \
 		$(use_enable imagecache) \
 		$(use_enable inotify) \
