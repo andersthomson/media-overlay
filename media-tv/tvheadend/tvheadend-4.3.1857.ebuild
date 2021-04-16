@@ -52,6 +52,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-4.0.9-use_system_queue.patch"
 	#"${FILESDIR}/${PN}-4.2.1-hdhomerun.patch"
 	"${FILESDIR}/${PN}-4.2.2-dtv_scan_tables.patch"
+	"${FILESDIR}/${PN}-4.2.8-fno-common.patch"
 )
 
 DOCS=( README.md )
