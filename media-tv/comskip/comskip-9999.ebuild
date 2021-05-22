@@ -29,7 +29,9 @@ KEYWORDS=""
 
 IUSE=""
 
-RDEPEND=""
+RDEPEND="media-video/ffmpeg
+		dev-libs/argtable
+		"
 
 DEPEND="${RDEPEND}"
 
