@@ -19,7 +19,7 @@ else
 			"0.82.006_p16") EGIT_COMMIT="26de6b88b6c7e2f50c9ae109a79214a74de39960" ;;
 			*) die "No version given"
 		esac
-        KEYWORDS="~amd64 ~x86 ~arm"
+        KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 fi
 
 
