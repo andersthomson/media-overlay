@@ -15,7 +15,7 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS=""
 
-DEPEND="dev-python/pycryptodome
+DEPEND="dev-python/cryptography
 	dev-python/pyyaml"
 BDEPEND="app-arch/zip"
 RDEPEND="${DEPEND}"
